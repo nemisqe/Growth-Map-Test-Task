@@ -2,7 +2,7 @@ import { useToast } from "@components/Toast";
 import { Ionicons } from "@expo/vector-icons";
 import { Lesson, LessonStatus } from "@type/lesson";
 import { useTheme } from "@utils/theme";
-import { GlassView } from "expo-glass-effect";
+import { GlassView, isLiquidGlassAvailable } from "expo-glass-effect";
 import { useMemo } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { STATUS_ICONS } from "./LessonCard.consts";
@@ -25,9 +25,11 @@ export function LessonCard({title, status}: Lesson) {
     }
   };
 
+  const Wrapper = isLiquidGlassAvailable() ? GlassView : View;
+
   return (
     <TouchableOpacity onPress={handlePress} style={styles.container}>
-      <GlassView style={styles.glassView} glassEffectStyle="regular" tintColor={theme.colors.card.background}>
+      <Wrapper style={styles.glassView} glassEffectStyle="regular" tintColor={theme.colors.card.background}>
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>
           <View style={[styles.statusBadge, { backgroundColor: statusColors.background }]}>
@@ -41,7 +43,7 @@ export function LessonCard({title, status}: Lesson) {
             </Text>
           </View>
         </View>
-      </GlassView>
+      </Wrapper>
     </TouchableOpacity>
   )
 }

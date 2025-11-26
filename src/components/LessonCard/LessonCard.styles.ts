@@ -8,6 +8,7 @@ export const createStyles = (theme: Theme) => StyleSheet.create({
   },
   glassView: {
     padding: theme.spacing.lg,
+    backgroundColor: theme.colors.card.background,
   },
   content: {
     gap: theme.spacing.sm,
