@@ -12,13 +12,19 @@ export function HomeScreen() {
   const { theme } = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
   
-  const renderItem: ListRenderItem<Lesson> = useCallback(({ item }: { item: Lesson }) => (
+  const renderItem: ListRenderItem<Lesson> = useCallback(({ item }) => (
     <LessonCard {...item} />
   ), []);
   
   return (
     <BaseScreen headerProps={{ headerTitle: 'Home' }}>
-      <FlatList contentContainerStyle={styles.list} data={GROWTH_MAP} renderItem={renderItem} keyExtractor={keyExtractor} />
+      <FlatList 
+        contentContainerStyle={styles.list} 
+        data={GROWTH_MAP} 
+        renderItem={renderItem} 
+        keyExtractor={keyExtractor} 
+        showsVerticalScrollIndicator={false}
+      />
     </BaseScreen>
   )
 }

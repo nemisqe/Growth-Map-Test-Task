@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Lesson, LessonStatus } from "@type/lesson";
 import { useTheme } from "@utils/theme";
 import { GlassView } from "expo-glass-effect";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { STATUS_ICONS } from "./LessonCard.consts";
 import { createStyles } from "./LessonCard.styles";
@@ -15,13 +15,15 @@ export function LessonCard({title, status}: Lesson) {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const statusColors = useMemo(() => getStatusColors(status, theme), [status, theme]);
 
-  const handlePress = useCallback(() => {
+  const handlePress = () => {
     if (status === LessonStatus.LOCKED) {
       showToast({ type: 'error', message: 'This lesson is locked' });
-    } else {
+    } else if (status === LessonStatus.ACTIVE) {
       console.log('Start lesson');
+    } else {
+      return;
     }
-  }, [status, showToast]);
+  };
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.container}>

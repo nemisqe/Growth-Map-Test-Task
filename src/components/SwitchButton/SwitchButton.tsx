@@ -14,7 +14,7 @@ export function SwitchButton({ title, value, onChange }: Props) {
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
-    <TouchableOpacity onPress={onChange} style={styles.container} activeOpacity={0.7}>
+    <TouchableOpacity onPress={onChange} style={styles.container}>
       <Text style={styles.label}>{title}</Text>
       <Switch
         value={value}
@@ -24,7 +24,6 @@ export function SwitchButton({ title, value, onChange }: Props) {
           true: theme.colors.surface.accent 
         }}
         thumbColor={theme.colors.text.onAccent}
-        ios_backgroundColor={theme.colors.text.secondary}
       />
     </TouchableOpacity>
   )
